@@ -94,7 +94,8 @@ class EventViewModel(private val repository: EventRepository) : ViewModel() {
                 _isLoadingItems.value = false
             } catch (e: Exception) {
                 _isLoadingItems.value = false
-                _state.value = _state.value?.copy(error = e.localizedMessage ?: "Error fetching items")
+                _state.value =
+                    _state.value?.copy(error = e.localizedMessage ?: "Error fetching items")
             }
         }
     }

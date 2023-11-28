@@ -10,6 +10,8 @@ import androidx.navigation.compose.rememberNavController
 import com.dikascode.eventbuildingchallenge.ui.screen.EventCategoriesScreen
 import com.dikascode.eventbuildingchallenge.network.RetrofitBuilder
 import com.dikascode.eventbuildingchallenge.repository.EventRepository
+import com.dikascode.eventbuildingchallenge.ui.component.CheckOutScreen
+import com.dikascode.eventbuildingchallenge.ui.screen.CategoryItemsScreen
 import com.dikascode.eventbuildingchallenge.viewmodel.EventViewModel
 
 class MainActivity : ComponentActivity() {
@@ -17,18 +19,31 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         val apiService = RetrofitBuilder.apiService
-        val viewModel = ViewModelProvider(this, ViewModelFactory(EventRepository(apiService)))
-            .get(EventViewModel::class.java)
+        val viewModel = ViewModelProvider(
+            this,
+            ViewModelFactory(EventRepository(apiService))
+        )[EventViewModel::class.java]
+
         setContent {
             val navController = rememberNavController()
             NavHost(navController = navController, startDestination = "eventScreen") {
                 composable("eventScreen") {
-                    EventCategoriesScreen(viewModel = viewModel, navController = navController) { categoryId ->
+                    EventCategoriesScreen(
+                        viewModel = viewModel,
+                        navController = navController
+                    ) { categoryId ->
                         navController.navigate("categoryItems/$categoryId")
                     }
                 }
-            }
+                composable("categoryItems/{categoryId}") { backStackEntry ->
+                    val categoryId = backStackEntry.arguments?.getString("categoryId")!!.toInt()
+                    CategoryItemsScreen(categoryId = categoryId, viewModel = viewModel)
+                }
 
+                composable("checkOut") {
+                    CheckOutScreen(viewModel = viewModel)
+                }
+            }
         }
     }
 }
