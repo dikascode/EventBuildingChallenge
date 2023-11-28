@@ -13,7 +13,9 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.dikascode.eventbuildingchallenge.R
 import com.dikascode.eventbuildingchallenge.model.Item
 import com.dikascode.eventbuildingchallenge.state.EventState
 import com.dikascode.eventbuildingchallenge.ui.component.CommonScaffold
@@ -35,7 +37,7 @@ fun CategoryItemsScreen(
 
     CommonScaffold(
         title = "Event Builder",
-        subtitle = "Add to your event to view our cost estimate.",
+        subtitle = stringResource(R.string.add_to_your_event_to_view_our_cost_estimate),
         placeholderText = "-",
         topMargin = 50.dp,
         content = { paddingValues ->

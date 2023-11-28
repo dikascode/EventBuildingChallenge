@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">EventBuildingChallenge</string>
+    <string name="save">Save</string>
+    <string name="add_to_your_event_to_view_our_cost_estimate">Add to your event to view our cost estimate.</string>
+    <string name="go_to_category">Go to category</string>
+    <string name="remove_item">Remove Item</string>
+    <string name="add_item">Add Item</string>
+    <string name="event_builder">Event Builder</string>
 </resources>

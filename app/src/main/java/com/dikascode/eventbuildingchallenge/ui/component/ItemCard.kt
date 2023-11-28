@@ -31,6 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
@@ -105,7 +106,9 @@ fun UnifiedItemCard(
                 ) {
                     Icon(
                         imageVector = if (isAdded) Icons.Default.Check else Icons.Default.Add,
-                        contentDescription = if (isAdded) "Remove Item" else "Add Item",
+                        contentDescription = if (isAdded) stringResource(R.string.remove_item) else stringResource(
+                            R.string.add_item
+                        ),
                         tint = Color.White
                     )
                 }
@@ -142,7 +145,7 @@ fun UnifiedItemCard(
                 )
                 Icon(
                     imageVector = Icons.Default.KeyboardArrowRight,
-                    contentDescription = "Go to category",
+                    contentDescription = stringResource(R.string.go_to_category),
                     modifier = Modifier.size(24.dp),
                     tint = arrowColor
                 )

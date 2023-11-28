@@ -1,6 +1,6 @@
 package com.dikascode.eventbuildingchallenge.viewmodel
 
-import android.util.Log
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,7 +9,6 @@ import com.dikascode.eventbuildingchallenge.state.EventIntent
 import com.dikascode.eventbuildingchallenge.state.EventState
 import com.dikascode.eventbuildingchallenge.model.Item
 import com.dikascode.eventbuildingchallenge.repository.EventRepository
-import com.google.gson.Gson
 import kotlinx.coroutines.launch
 
 class EventViewModel(private val repository: EventRepository) : ViewModel() {
@@ -51,7 +50,7 @@ class EventViewModel(private val repository: EventRepository) : ViewModel() {
         }
     }
 
-    // Call this function when an item is added to the list
+    // function to add item to list
     fun addItemToList(item: Item) {
         val currentItems = _userItems.value ?: mutableListOf()
         if (currentItems.any { it.id == item.id }) {
@@ -90,6 +89,8 @@ class EventViewModel(private val repository: EventRepository) : ViewModel() {
         viewModelScope.launch {
             try {
                 val items = repository.getItemsForCategory(categoryId)
+
+                //update state
                 _state.value = EventState(categoryItems = items)
                 _isLoadingItems.value = false
             } catch (e: Exception) {

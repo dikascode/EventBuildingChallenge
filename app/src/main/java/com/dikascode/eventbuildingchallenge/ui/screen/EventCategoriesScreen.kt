@@ -27,15 +27,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.navigation.NavController
+import com.dikascode.eventbuildingchallenge.R
 import com.dikascode.eventbuildingchallenge.ui.component.CommonScaffold
 import com.dikascode.eventbuildingchallenge.state.EventIntent
 import com.dikascode.eventbuildingchallenge.state.EventState
 import com.dikascode.eventbuildingchallenge.viewmodel.EventViewModel
 import com.dikascode.eventbuildingchallenge.ui.component.UnifiedItemCard
 import com.dikascode.eventbuildingchallenge.model.Category
+import com.dikascode.eventbuildingchallenge.util.Constants.CHECK_OUT_SCREEN
 
 
 @Composable
@@ -53,8 +56,8 @@ fun EventCategoriesScreen(
     }
 
     CommonScaffold(
-        title = "Event Builder",
-        subtitle = "Add to your event to view our cost estimate.",
+        title = stringResource(R.string.event_builder),
+        subtitle = stringResource(R.string.add_to_your_event_to_view_our_cost_estimate),
         placeholderText = "-",
         topMargin = 50.dp,
         bottomBarContent = { // Provide the bottom bar content
@@ -62,7 +65,7 @@ fun EventCategoriesScreen(
                 containerColor = Color.White
             ) {
                 Button(
-                    onClick = { navController.navigate("checkOut") },
+                    onClick = { navController.navigate(CHECK_OUT_SCREEN) },
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp, vertical = 8.dp)
@@ -71,7 +74,7 @@ fun EventCategoriesScreen(
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF5DA3A9))
                 ) {
                     Text(
-                        text = "Save",
+                        text = stringResource(R.string.save),
                         color = Color.White,
                         style = MaterialTheme.typography.titleMedium
                     )

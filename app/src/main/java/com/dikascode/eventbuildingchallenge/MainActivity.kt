@@ -12,6 +12,9 @@ import com.dikascode.eventbuildingchallenge.network.RetrofitBuilder
 import com.dikascode.eventbuildingchallenge.repository.EventRepository
 import com.dikascode.eventbuildingchallenge.ui.component.CheckOutScreen
 import com.dikascode.eventbuildingchallenge.ui.screen.CategoryItemsScreen
+import com.dikascode.eventbuildingchallenge.util.Constants.CATEGORY_ID
+import com.dikascode.eventbuildingchallenge.util.Constants.CHECK_OUT_SCREEN
+import com.dikascode.eventbuildingchallenge.util.Constants.EVENT_SCREEN
 import com.dikascode.eventbuildingchallenge.viewmodel.EventViewModel
 
 class MainActivity : ComponentActivity() {
@@ -21,13 +24,13 @@ class MainActivity : ComponentActivity() {
         val apiService = RetrofitBuilder.apiService
         val viewModel = ViewModelProvider(
             this,
-            ViewModelFactory(EventRepository(apiService))
+            ViewModelFactory(EventRepository(apiService, this))
         )[EventViewModel::class.java]
 
         setContent {
             val navController = rememberNavController()
-            NavHost(navController = navController, startDestination = "eventScreen") {
-                composable("eventScreen") {
+            NavHost(navController = navController, startDestination = EVENT_SCREEN) {
+                composable(EVENT_SCREEN) {
                     EventCategoriesScreen(
                         viewModel = viewModel,
                         navController = navController
@@ -36,11 +39,11 @@ class MainActivity : ComponentActivity() {
                     }
                 }
                 composable("categoryItems/{categoryId}") { backStackEntry ->
-                    val categoryId = backStackEntry.arguments?.getString("categoryId")!!.toInt()
+                    val categoryId = backStackEntry.arguments?.getString(CATEGORY_ID)!!.toInt()
                     CategoryItemsScreen(categoryId = categoryId, viewModel = viewModel)
                 }
 
-                composable("checkOut") {
+                composable(CHECK_OUT_SCREEN) {
                     CheckOutScreen(viewModel = viewModel)
                 }
             }
