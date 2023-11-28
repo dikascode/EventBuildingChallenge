@@ -20,11 +20,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.dikascode.eventbuildingchallenge.util.formatBudget
 import com.dikascode.eventbuildingchallenge.viewmodel.EventViewModel
 
 @Composable
 fun CheckOutScreen(viewModel: EventViewModel) {
     val budget by viewModel.selectedBudget.observeAsState(0 to 0)
+
+    val formattedBudget = formatBudget(Pair(budget.first, budget.second))
 
     CommonScaffold(
         title = "",
@@ -41,7 +44,7 @@ fun CheckOutScreen(viewModel: EventViewModel) {
             ) {
                 CircleOverlayContent(
                     title = "Event Saved!",
-                    subtitle = "$${budget.first}-${budget.second}",
+                    subtitle = formattedBudget,
                 )
             }
         }

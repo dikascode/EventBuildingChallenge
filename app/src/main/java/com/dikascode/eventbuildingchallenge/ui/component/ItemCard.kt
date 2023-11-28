@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
 import com.dikascode.eventbuildingchallenge.R
+import com.dikascode.eventbuildingchallenge.util.formatBudget
 
 @Composable
 fun UnifiedItemCard(
@@ -111,6 +112,7 @@ fun UnifiedItemCard(
             }
         }
         if (!isCategory) {
+            val formattedBudget = formatBudget(Pair(minBudget ?:0 , maxBudget ?: 0))
             Column(modifier = Modifier.padding(8.dp)) {
                 Text(
                     text = title,
@@ -119,7 +121,7 @@ fun UnifiedItemCard(
                     overflow = TextOverflow.Ellipsis
                 )
                 Text(
-                    text = "$${minBudget ?: 0} - $${maxBudget ?: 0}",
+                    text = formattedBudget,
                     style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold),
                     color = Color.Black
                 )
