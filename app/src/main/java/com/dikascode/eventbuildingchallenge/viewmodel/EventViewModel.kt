@@ -23,7 +23,7 @@ class EventViewModel(private val repository: EventRepository) : ViewModel() {
     val userItems: LiveData<MutableList<Item>> = _userItems
 
     // This will hold the sum of min and max budgets of selected items
-    private val _selectedBudget = MutableLiveData<Pair<Int, Int>>(0 to 0)
+    private val _selectedBudget = MutableLiveData(0 to 0)
     val selectedBudget: LiveData<Pair<Int, Int>> = _selectedBudget
 
     init {

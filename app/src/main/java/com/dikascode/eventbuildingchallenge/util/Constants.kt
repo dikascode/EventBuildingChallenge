@@ -6,4 +6,5 @@ object Constants {
     const val EVENT_SCREEN = "eventScreen"
     const val CHECK_OUT_SCREEN = "checkOut"
     const val CATEGORY_ID = "categoryId"
+    const val CATEGORY_TITLE =  "categoryTitle"
 }

@@ -39,7 +39,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
 import com.dikascode.eventbuildingchallenge.R
-import com.dikascode.eventbuildingchallenge.util.formatBudget
+import com.dikascode.eventbuildingchallenge.ui.theme.arrowColor
+import com.dikascode.eventbuildingchallenge.ui.theme.backgroundColor
+import com.dikascode.eventbuildingchallenge.ui.theme.borderColor
+import com.dikascode.eventbuildingchallenge.ui.theme.textColor
+import com.dikascode.eventbuildingchallenge.util.EventUtil.formatBudget
 
 @Composable
 fun UnifiedItemCard(
@@ -55,10 +59,6 @@ fun UnifiedItemCard(
     onAddItem: (() -> Unit)? = null,
     onRemoveItem: (() -> Unit)? = null
 ) {
-    val backgroundColor = Color(0xFFFFFFFF) // #FFFFFF
-    val borderColor = Color(0xFFDFDACC) // #DFDACC
-    val arrowColor = Color(0xFF5DA3A9) // #5DA3A9
-
     // Use the state for isAdded
     val isAdded = isAddedState.value
 
@@ -78,7 +78,7 @@ fun UnifiedItemCard(
                     data = imageUrl,
                     builder = {
                         crossfade(true)
-                        placeholder(R.drawable.ic_launcher_background)
+                        placeholder(R.drawable.event_blur)
                     }
                 ),
                 contentDescription = title,
@@ -88,39 +88,51 @@ fun UnifiedItemCard(
                 contentScale = ContentScale.Crop
             )
             if (!isCategory) {
-                IconButton(
-                    onClick = {
-                        if (!isAdded) {
-                            onAddItem?.invoke()
-                            isAddedState.value = true
-                        } else {
-                            onRemoveItem?.invoke()
-                        }
-                    },
-                    enabled = !isAdded,
+                Box(
                     modifier = Modifier
                         .align(Alignment.TopEnd)
                         .size(32.dp)
                         .padding(top = 8.dp, end = 8.dp)
-                        .background(Color.Black.copy(alpha = 0.3f), shape = CircleShape)
                 ) {
-                    Icon(
-                        imageVector = if (isAdded) Icons.Default.Check else Icons.Default.Add,
-                        contentDescription = if (isAdded) stringResource(R.string.remove_item) else stringResource(
-                            R.string.add_item
-                        ),
-                        tint = Color.White
+                    Box(
+                        modifier = Modifier
+                            .matchParentSize()
+                            .background(
+                                color = Color.Black.copy(alpha = 0.5f),
+                                shape = CircleShape
+                            )
                     )
+                    IconButton(
+                        onClick = {
+                            if (!isAdded) {
+                                onAddItem?.invoke()
+                                isAddedState.value = true
+                            } else {
+                                onRemoveItem?.invoke()
+                            }
+                        },
+                        enabled = !isAdded,
+                        modifier = Modifier
+                            .align(Alignment.Center)
+                    ) {
+                        Icon(
+                            imageVector = if (isAdded) Icons.Default.Check else Icons.Default.Add,
+                            contentDescription = if (isAdded) stringResource(R.string.remove_item) else stringResource(R.string.add_item),
+                            tint = Color.White,
+                        )
+                    }
                 }
+
             }
         }
         if (!isCategory) {
-            val formattedBudget = formatBudget(Pair(minBudget ?:0 , maxBudget ?: 0))
+            val formattedBudget = formatBudget(Pair(minBudget ?: 0, maxBudget ?: 0))
             Column(modifier = Modifier.padding(8.dp)) {
                 Text(
                     text = title,
                     style = MaterialTheme.typography.bodySmall.copy(fontSize = 16.sp),
                     maxLines = 1,
+                    color = textColor,
                     overflow = TextOverflow.Ellipsis
                 )
                 Text(
@@ -134,14 +146,15 @@ fun UnifiedItemCard(
             Row(
                 modifier = Modifier.padding(8.dp),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
+                horizontalArrangement = Arrangement.SpaceBetween,
             ) {
                 Text(
                     text = title,
-                    style = MaterialTheme.typography.titleSmall.copy(fontSize = 16.sp),
+                    style = MaterialTheme.typography.bodySmall.copy(fontSize = 16.sp),
                     maxLines = 1,
+                    color = textColor,
                     overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier.weight(1f),
                 )
                 Icon(
                     imageVector = Icons.Default.KeyboardArrowRight,

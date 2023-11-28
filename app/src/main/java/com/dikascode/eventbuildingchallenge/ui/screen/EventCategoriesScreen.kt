@@ -1,5 +1,6 @@
 package com.dikascode.eventbuildingchallenge.ui.screen
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -27,6 +28,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
@@ -39,6 +41,8 @@ import com.dikascode.eventbuildingchallenge.viewmodel.EventViewModel
 import com.dikascode.eventbuildingchallenge.ui.component.UnifiedItemCard
 import com.dikascode.eventbuildingchallenge.model.Category
 import com.dikascode.eventbuildingchallenge.util.Constants.CHECK_OUT_SCREEN
+import com.dikascode.eventbuildingchallenge.util.EventUtil.showToast
+import com.dikascode.eventbuildingchallenge.util.SharedPrefHelper
 
 
 @Composable
@@ -48,6 +52,9 @@ fun EventCategoriesScreen(
     navigateToCategoryItems: (Int) -> Unit
 ) {
     val state by viewModel.state.observeAsState(EventState())
+    val budget by viewModel.selectedBudget.observeAsState(0 to 0)
+
+    val context = LocalContext.current
 
     LaunchedEffect(key1 = state.categories.isEmpty()) {
         if (state.categories.isEmpty()) {
@@ -60,12 +67,18 @@ fun EventCategoriesScreen(
         subtitle = stringResource(R.string.add_to_your_event_to_view_our_cost_estimate),
         placeholderText = "-",
         topMargin = 50.dp,
-        bottomBarContent = { // Provide the bottom bar content
+        bottomBarContent = { //bottom bar content
             BottomAppBar(
                 containerColor = Color.White
             ) {
                 Button(
-                    onClick = { navController.navigate(CHECK_OUT_SCREEN) },
+                    onClick = {
+                        if (budget.first == 0 && budget.second == 0) {
+                            showToast(context, "Please add an item to proceed", Toast.LENGTH_LONG)
+                        } else {
+                            navController.navigate(CHECK_OUT_SCREEN)
+                        }
+                    },
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp, vertical = 8.dp)
@@ -115,7 +128,12 @@ fun CategoryList(
             UnifiedItemCard(
                 title = category.title,
                 imageUrl = category.image,
-                onItemSelect = { onCategorySelected(category.id) },
+                onItemSelect = {
+                    onCategorySelected(category.id)
+
+                    //Save each category title on click
+                    SharedPrefHelper.saveCategoryTitle(category.title)
+                },
                 isCategory = true,
                 arrowBesideTitle = true,
                 isAddedState = isAddedState

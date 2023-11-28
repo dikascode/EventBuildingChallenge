@@ -20,7 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.dikascode.eventbuildingchallenge.util.formatBudget
+import com.dikascode.eventbuildingchallenge.util.EventUtil.formatBudget
 import com.dikascode.eventbuildingchallenge.viewmodel.EventViewModel
 
 @Composable

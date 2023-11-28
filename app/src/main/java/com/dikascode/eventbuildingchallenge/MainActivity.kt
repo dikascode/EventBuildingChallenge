@@ -15,6 +15,7 @@ import com.dikascode.eventbuildingchallenge.ui.screen.CategoryItemsScreen
 import com.dikascode.eventbuildingchallenge.util.Constants.CATEGORY_ID
 import com.dikascode.eventbuildingchallenge.util.Constants.CHECK_OUT_SCREEN
 import com.dikascode.eventbuildingchallenge.util.Constants.EVENT_SCREEN
+import com.dikascode.eventbuildingchallenge.util.SharedPrefHelper
 import com.dikascode.eventbuildingchallenge.viewmodel.EventViewModel
 
 class MainActivity : ComponentActivity() {
@@ -26,6 +27,8 @@ class MainActivity : ComponentActivity() {
             this,
             ViewModelFactory(EventRepository(apiService, this))
         )[EventViewModel::class.java]
+
+        SharedPrefHelper.init(this)
 
         setContent {
             val navController = rememberNavController()
@@ -48,5 +51,10 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        SharedPrefHelper.clearData()
     }
 }
