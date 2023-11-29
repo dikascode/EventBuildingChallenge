@@ -40,7 +40,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
 import com.dikascode.eventbuildingchallenge.R
 import com.dikascode.eventbuildingchallenge.model.Item
-import com.dikascode.eventbuildingchallenge.ui.theme.arrowColor
+import com.dikascode.eventbuildingchallenge.ui.theme.eventIncColor
 import com.dikascode.eventbuildingchallenge.ui.theme.backgroundColor
 import com.dikascode.eventbuildingchallenge.ui.theme.borderColor
 import com.dikascode.eventbuildingchallenge.ui.theme.textColor
@@ -93,8 +93,8 @@ fun UnifiedItemCard(
                 Box(
                     modifier = Modifier
                         .align(Alignment.TopEnd)
-                        .size(32.dp)
-                        .padding(top = 8.dp, end = 8.dp)
+                        .size(40.dp)
+                        .padding(top = 10.dp, end = 10.dp)
                 ) {
                     Box(
                         modifier = Modifier
@@ -165,7 +165,7 @@ fun UnifiedItemCard(
                     imageVector = Icons.Default.KeyboardArrowRight,
                     contentDescription = stringResource(R.string.go_to_category),
                     modifier = Modifier.size(24.dp),
-                    tint = arrowColor
+                    tint = eventIncColor
                 )
             }
         }

@@ -40,6 +40,7 @@ import com.dikascode.eventbuildingchallenge.state.EventState
 import com.dikascode.eventbuildingchallenge.viewmodel.EventViewModel
 import com.dikascode.eventbuildingchallenge.ui.component.UnifiedItemCard
 import com.dikascode.eventbuildingchallenge.model.Category
+import com.dikascode.eventbuildingchallenge.ui.theme.eventIncColor
 import com.dikascode.eventbuildingchallenge.util.Constants.CHECK_OUT_SCREEN
 import com.dikascode.eventbuildingchallenge.util.EventUtil.showToast
 import com.dikascode.eventbuildingchallenge.util.SharedPrefHelper
@@ -151,7 +152,9 @@ fun LoadingScreen() {
             contentAlignment = Alignment.Center,
             modifier = Modifier.fillMaxSize()
         ) {
-            CircularProgressIndicator(modifier = Modifier.size(50.dp))
+            CircularProgressIndicator(
+                modifier = Modifier.size(50.dp),
+                color = eventIncColor)
         }
     }
 }

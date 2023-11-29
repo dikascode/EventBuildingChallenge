@@ -83,7 +83,7 @@ fun CircleOverlayContent(
             Text(
                 text = subtitle,
                 style = MaterialTheme.typography.headlineLarge.copy(
-                    fontSize = 40.sp, // Increase font size
+                    fontSize = 30.sp, // Increase font size
                     color = Color.Black
                 ),
                 modifier = Modifier.align(Alignment.CenterHorizontally)
@@ -93,7 +93,9 @@ fun CircleOverlayContent(
                 imageVector = Icons.Default.Star,
                 contentDescription = null,
                 tint = Color.Black,
-                modifier = Modifier.size(80.dp).padding(vertical = 10.dp)
+                modifier = Modifier
+                    .size(60.dp)
+                    .padding(vertical = 10.dp)
             )
         }
     }

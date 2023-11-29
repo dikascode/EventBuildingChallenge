@@ -12,5 +12,5 @@ val Pink40 = Color(0xFF7D5260)
 
 val backgroundColor = Color(0xFFFFFFFF) // #FFFFFF
 val borderColor = Color(0xFFDFDACC) // #DFDACC
-val arrowColor = Color(0xFF5DA3A9) // #5DA3A9
+val eventIncColor = Color(0xFF5DA3A9) // #5DA3A9
 val textColor = Color(0xFF616161) //#616161;
