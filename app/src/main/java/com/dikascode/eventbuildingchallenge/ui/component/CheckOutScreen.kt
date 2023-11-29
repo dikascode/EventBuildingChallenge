@@ -20,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.dikascode.eventbuildingchallenge.util.EventUtil.formatBudget
 import com.dikascode.eventbuildingchallenge.viewmodel.EventViewModel
 
@@ -69,21 +70,30 @@ fun CircleOverlayContent(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
+
             Text(
                 text = title,
-                style = MaterialTheme.typography.titleMedium.copy(color = Color.Black),
+                style = MaterialTheme.typography.titleMedium.copy(
+                    fontSize = 28.sp,
+                    color = Color.Black
+                ),
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
+
             Text(
                 text = subtitle,
-                style = MaterialTheme.typography.headlineLarge.copy(color = Color.Black),
+                style = MaterialTheme.typography.headlineLarge.copy(
+                    fontSize = 40.sp, // Increase font size
+                    color = Color.Black
+                ),
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
+            // Star icon
             Icon(
                 imageVector = Icons.Default.Star,
                 contentDescription = null,
                 tint = Color.Black,
-                modifier = Modifier.size(24.dp)
+                modifier = Modifier.size(80.dp).padding(vertical = 10.dp)
             )
         }
     }

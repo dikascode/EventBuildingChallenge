@@ -7,6 +7,6 @@ data class Item(
     val maxBudget: Int,
     val avgBudget: Int,
     val image: String,
-    var isAdded: Boolean = false
+    var isAdded: Boolean = false //to track state of item added
 )
 

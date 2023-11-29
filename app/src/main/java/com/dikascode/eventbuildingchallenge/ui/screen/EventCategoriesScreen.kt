@@ -124,7 +124,9 @@ fun CategoryList(
         modifier = modifier
     ) {
         items(categories) { category ->
+
             val isAddedState = remember { mutableStateOf(false) }
+
             UnifiedItemCard(
                 title = category.title,
                 imageUrl = category.image,

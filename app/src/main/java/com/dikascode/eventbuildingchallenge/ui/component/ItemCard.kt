@@ -39,6 +39,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
 import com.dikascode.eventbuildingchallenge.R
+import com.dikascode.eventbuildingchallenge.model.Item
 import com.dikascode.eventbuildingchallenge.ui.theme.arrowColor
 import com.dikascode.eventbuildingchallenge.ui.theme.backgroundColor
 import com.dikascode.eventbuildingchallenge.ui.theme.borderColor
@@ -57,7 +58,8 @@ fun UnifiedItemCard(
     arrowBesideTitle: Boolean = false,
     isAddedState: MutableState<Boolean>, // Accept mutable state
     onAddItem: (() -> Unit)? = null,
-    onRemoveItem: (() -> Unit)? = null
+    onRemoveItem: (() -> Unit)? = null,
+    item: Item? = null
 ) {
     // Use the state for isAdded
     val isAdded = isAddedState.value
@@ -68,7 +70,7 @@ fun UnifiedItemCard(
             .size(width = 164.dp, height = cardHeight)
             .clip(RoundedCornerShape(5.dp))
             .clickable(onClick = onItemSelect)
-            .border(1.dp, borderColor, RoundedCornerShape(5.dp)),
+            .border(1.dp, borderColor, RoundedCornerShape(2.dp)),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         colors = CardDefaults.cardColors(containerColor = backgroundColor)
     ) {
@@ -106,18 +108,21 @@ fun UnifiedItemCard(
                         onClick = {
                             if (!isAdded) {
                                 onAddItem?.invoke()
+                                item!!.isAdded = true
                                 isAddedState.value = true
                             } else {
                                 onRemoveItem?.invoke()
                             }
                         },
-                        enabled = !isAdded,
+                        enabled = !item!!.isAdded,
                         modifier = Modifier
                             .align(Alignment.Center)
                     ) {
                         Icon(
-                            imageVector = if (isAdded) Icons.Default.Check else Icons.Default.Add,
-                            contentDescription = if (isAdded) stringResource(R.string.remove_item) else stringResource(R.string.add_item),
+                            imageVector = if (item.isAdded) Icons.Default.Check else Icons.Default.Add,
+                            contentDescription = if (item.isAdded) stringResource(R.string.remove_item) else stringResource(
+                                R.string.add_item
+                            ),
                             tint = Color.White,
                         )
                     }

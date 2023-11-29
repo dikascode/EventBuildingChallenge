@@ -75,7 +75,10 @@ fun CategoryItemsList(
             // Create a MutableState for each item
             val isAddedState = remember { mutableStateOf(item.isAdded) }
 
+            item.isAdded = isAddedState.value
+
             UnifiedItemCard(
+                item = item,
                 title = item.title,
                 imageUrl = item.image,
                 onItemSelect = { },
